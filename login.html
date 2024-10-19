@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script>
+		$(function(){
+			$("#login_btn").click(function(){
+				var loginId = $('input[name="id"]').val();
+				var loginPw = $('input[name="pw"]').val();
+				
+				var loginData = {
+					id: loginId,
+					pw: loginPw
+				}
+				
+				$.ajax({
+					contentType: 'application/json',
+                    data: JSON.stringify(loginData),
+					type: 'post',
+					url: "/login/user",
+					success: function(res){
+						if(res=="ok") {
+							alert("로그인");
+							location.href="main2";
+						} else{
+							alert("다시 입력");
+						}		
+					},
+					error: function(){
+						alert("로그인 실패");
+					}
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+	<input type="text" placeholder="id" name="id">
+	<input type="password" placeholder="password" name="pw">
+	<input type="button" value="LOGIN" id="login_btn">
+</body>
+</html>

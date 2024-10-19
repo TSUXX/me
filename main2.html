@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script>
+		$(function(){
+			$("#post_btn").click(function(){
+				location.href = "list";
+			})
+			
+			$("#logout_btn").click(function(){
+				location.href = "logout";
+			})
+		})
+	</script>
+</head>
+<body>
+	<input type="button" value="POST" id="post_btn">
+	<input type="button" value="LOGOUT" id="logout_btn">
+</body>
+</html>

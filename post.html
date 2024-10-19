@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script>
+		$(function(){
+			$("#post_btn").click(function(){
+				let title = $('input[name="title"]').val();
+				let contents = $('input[name="contents"]').val();
+				
+				let postdata = {
+					title:title,
+					contents:contents
+				}
+				
+				$.ajax({
+					url:"post/data",
+					type: "post",
+					data: JSON.stringify(postdata),
+        			contentType: "application/json",
+        			success: function(res){
+						alert("작성완료");
+						location.href="list";
+					},
+					error: function() {
+						alert("다시 작성");
+					}
+				})
+			})
+		})
+		
+	</script>
+</head>
+	제목<input type="text" name="title"><br>
+	내용<input type="text" name="contents"><br>
+	<input type="button" value="POST" id="post_btn"><br>
+</body>
+</html>

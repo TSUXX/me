@@ -1,0 +1,59 @@
+<html>
+<head>
+	<meta charset="utf-8"></meta>
+	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script>
+		$(function(){
+			$("#edit_btn").click(function(){
+				var name = $('input[name="name"]').val()
+				var pw = $('input[name="update_pw"]').val();
+				
+				console.log(name, pw);
+				
+				$.ajax({
+					url:"/update/user",
+					type:"put",
+					data: JSON.stringify({ name: name, pw: pw }),
+					contentType: "application/json",
+					success: function(res) {
+						if(res) {
+							alert("수정");
+							document.location.reload();
+						} else{ alert("불일치")}},
+					error: function() {
+						alert("다시 입력");
+					}
+				})
+			})
+			
+			$("#delete_btn").click(function(){
+				var pw = $('input[name="delete_pw"]').val();
+				
+				console.log(pw);
+				
+				$.ajax({
+					url: "/delete/user",
+					data: JSON.stringify({ pw: pw }),
+					contentType: "application/json",
+					type:"delete",
+        			success: function(res){
+						if(res) {
+						alert("삭제");
+						document.location.reload(); } 
+						else { alert("불일치") }},
+					error: function() {
+						alert("다시 입력");
+					}
+				});
+			});
+		})
+	</script>
+</head>
+<body>
+	<input type="password" placeholder="password" name="name">
+	<input type="password" placeholder="password" name="update_pw">
+	<input type="button" value="비밀번호 변경" id="edit_btn">
+	<input type="password" placeholder="password" name="delete_pw">
+	<input type="button" value="삭제" id="delete_btn">
+</body>
+</html>

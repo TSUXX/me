@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script>
+		$(function(){
+			$("#join_btn").click(function(){
+				let name = $('input[name="name"]').val();
+				let id = $('input[name="id"]').val();
+				let pw = $('input[name="pw"]').val();
+				
+				let datalist = {
+					name: name,
+					id : id,
+					pw : pw
+				}
+				
+				$.ajax({
+					url: "userAPI",
+					data: datalist,
+					type: "post",
+					data: JSON.stringify(datalist),
+        			contentType: "application/json",
+					success: function(res) {
+						if(res) {
+							alert("저장");
+						}	
+					},
+					error: function() {
+						alert("오류");
+					}
+				});
+			});
+			
+			$("#login_btn").click(function(){
+				location.href="/login";
+			});
+		});
+	</script>
+</head>
+<body>
+	<input type="text" placeholder="name" name="name">
+	<input type="text" placeholder="id" name="id">
+	<input type="text" placeholder="password" name="pw">
+	<input type="button" value="JOIN" id="join_btn">
+	<input type="button" value="LOGIN" id="login_btn">
+</body>
+</html>
